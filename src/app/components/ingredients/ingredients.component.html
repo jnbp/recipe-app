@@ -1,0 +1,10 @@
+<div *ngIf="ingredients?.length > 0;else noIngredients">
+  <ul *ngFor="let ingredient of ingredients" class="collection">
+    <li class="collection-item">{{ingredient.title}}</li>
+  </ul>
+</div>
+
+<ng-template #noIngredients>
+  <hr>
+  <h5>Keine Zutaten!</h5>
+</ng-template>
