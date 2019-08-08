@@ -2,6 +2,9 @@
   <ul *ngFor="let ingredient of ingredients" class="collection">
     <li class="collection-item">{{ingredient.title}}</li>
   </ul>
+  <mat-list *ngFor="let ingredient of ingredients" class="collection" role="list">
+    <mat-list-item role="listitem">{{ingredient.title}}</mat-list-item>
+  </mat-list>
 </div>
 
 <ng-template #noIngredients>

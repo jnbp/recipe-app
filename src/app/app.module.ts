@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IngredientsComponent } from './components/ingredients/ingredients.component';
 import {IngredientService} from './services/ingredient.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatListModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,10 @@ import {IngredientService} from './services/ingredient.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatListModule
   ],
   providers: [IngredientService],
   bootstrap: [AppComponent]
