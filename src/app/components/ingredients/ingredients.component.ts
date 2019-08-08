@@ -18,4 +18,9 @@ export class IngredientsComponent implements OnInit {
     });
   }
 
+  deleteIngredient(event, ingredient) {
+    this.ingredientService.deleteIngredient(ingredient);
+    console.log(ingredient);
+  }
+
 }

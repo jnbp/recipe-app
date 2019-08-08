@@ -9,12 +9,15 @@ import {map} from 'rxjs/operators';
 export class IngredientService {
   ingredientsCollection: AngularFirestoreCollection<Ingredient>;
   ingredients: Observable<Ingredient[]>
+  itemDoc: AngularFirestoreDocument<Ingredient>;
 
   constructor(public afs: AngularFirestore) {
     //this.ingredients = this.afs.collection('ingredients').valueChanges();
 
+    this.ingredientsCollection = this.afs.collection('ingredients', ref => ref.orderBy('category','asc'));
+
     // Fetch Document WITH ID
-    this.ingredients = this.afs.collection('ingredients').snapshotChanges().pipe(
+    this.ingredients = this.ingredientsCollection.snapshotChanges().pipe(
       map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Ingredient;
@@ -27,4 +30,14 @@ export class IngredientService {
   getIngredients() {
     return this.ingredients;
   }
+
+  addIngredient(ingredient: Ingredient) {
+    this.ingredientsCollection.add(ingredient);
+  }
+
+  deleteIngredient(ingredient: Ingredient) {
+    this.itemDoc = this.afs.doc(`ingredients/${ingredient.id}`);
+    this.itemDoc.delete();
+  }
+
 }
