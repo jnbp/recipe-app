@@ -9,7 +9,7 @@
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Name des Rezeptes</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Name" formControlName="firstCtrl" required>
+        <input matInput name ='title' [(ngModel)]="recipe.title" placeholder="Name" formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Weiter</button>
@@ -20,7 +20,7 @@
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Bild zum Rezept</ng-template>
       <mat-form-field>
-        <input matInput placeholder="https://www.example.com/picture" formControlName="secondCtrl" required>
+        <input matInput name ='picture' [(ngModel)]="recipe.picture" placeholder="Name"  formControlName="secondCtrl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Zurück</button>
@@ -45,7 +45,7 @@
     <form [formGroup]="forthFormGroup">
       <ng-template matStepLabel>Zubereitungsschritte</ng-template>
       <mat-form-field>
-        <input matInput placeholder="https://www.example.com/picture" formControlName="secondCtrl" required>
+        <input matInput name ='instruction' [(ngModel)]="recipe.instruction" placeholder="Name"  formControlName="secondCtrl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Zurück</button>
@@ -53,14 +53,26 @@
       </div>
     </form>
   </mat-step>
+
+  <mat-step [stepControl]="sixthFormGroup">
+    <form [formGroup]="sixthFormGroup" (ngSubmit)="onSubmit(stepper)">
+      <ng-template matStepLabel>Abschließen</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Zurück</button>
+        <button mat-button type="submit">Speichern</button>
+      </div>
+    </form>
+  </mat-step>
+<!--
   <mat-step>
     <ng-template matStepLabel>Abschließen</ng-template>
     You are now done.
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="stepper.reset()>Reset</button>
     </div>
   </mat-step>
+  -->
 </mat-vertical-stepper>
 
 

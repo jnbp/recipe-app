@@ -8,13 +8,14 @@ import {map} from 'rxjs/operators';
 })
 export class IngredientService {
   ingredientsCollection: AngularFirestoreCollection<Ingredient>;
-  ingredients: Observable<Ingredient[]>
+  ingredients: Observable<Ingredient[]>;
   itemDoc: AngularFirestoreDocument<Ingredient>;
+  selectedIngredients = [];
 
   constructor(public afs: AngularFirestore) {
     //this.ingredients = this.afs.collection('ingredients').valueChanges();
 
-    this.ingredientsCollection = this.afs.collection('ingredients', ref => ref.orderBy('category','asc'));
+    this.ingredientsCollection = this.afs.collection('ingredients', ref => ref.orderBy('category', 'asc'));
 
     // Fetch Document WITH ID
     this.ingredients = this.ingredientsCollection.snapshotChanges().pipe(
@@ -38,6 +39,14 @@ export class IngredientService {
   deleteIngredient(ingredient: Ingredient) {
     this.itemDoc = this.afs.doc(`ingredients/${ingredient.id}`);
     this.itemDoc.delete();
+  }
+
+  setSelectedIngredients(ingredients) {
+  this.selectedIngredients = ingredients;
+}
+
+  getSelectedIngredients() {
+     return this.selectedIngredients;
   }
 
 }
