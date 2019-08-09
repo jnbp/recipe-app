@@ -1,0 +1,41 @@
+<mat-card>
+  <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+    <mat-form-field (ngSubmit)="onSubmit()" class="form-group">
+      <input name ='title' matInput [(ngModel)]="ingredient.title" placeholder="title" required>
+    </mat-form-field>
+
+    <mat-form-field (ngSubmit)="onSubmit(form)" class="form-group">
+      <input name ='unit' matInput [(ngModel)]="ingredient.unit" placeholder="unit" required>
+    </mat-form-field>
+
+    <mat-form-field (ngSubmit)="onSubmit(form)" class="form-group">
+      <input name ='category' matInput [(ngModel)]="ingredient.category" placeholder="category" required>
+    </mat-form-field>
+
+    <!--
+    <mat-form-field>
+      <mat-label>Einheit</mat-label>
+    <mat-select name='unit' [(ngModel)]="ingredient.unit">
+      <mat-option *ngFor="let unit of units" value="unit">
+        {{unit}}
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Kategorie</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let category of categorys" value="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    -->
+
+
+
+    <div>
+      <button mat-stroked-button type="submit" [disabled]="form.invalid">Add</button>
+    </div>
+  </form>
+</mat-card>
