@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RecipesService} from '../../../services/recipes.service';
+import {RecipeService} from '../../../services/recipe.service';
 import {MatVerticalStepper} from '@angular/material';
 import {IngredientService} from '../../../services/ingredient.service';
 
@@ -26,7 +26,7 @@ export class AddRecipeComponent implements OnInit {
   forthFormGroup: FormGroup;
   sixthFormGroup: FormGroup;
 
-  constructor(private recipesService: RecipesService,
+  constructor(private recipeService: RecipeService,
               private ingredientService: IngredientService,
               private _formBuilder: FormBuilder) { }
 
@@ -50,7 +50,7 @@ export class AddRecipeComponent implements OnInit {
 
   onSubmit(stepper: MatVerticalStepper) {
     if (this.recipe.title !== '' && this.recipe.instruction !== '' && this.recipe.picture !== '') {
-      this.recipesService.addRecipe(this.recipe, this.recipe.id, this.ingredientService.getSelectedIngredients());
+      this.recipeService.addRecipe(this.recipe, this.recipe.id, this.ingredientService.getSelectedIngredients());
     }
     console.log(this.recipe);
     console.log(this.ingredientService.getSelectedIngredients());

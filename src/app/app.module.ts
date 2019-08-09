@@ -12,7 +12,7 @@ import {IngredientService} from './services/ingredient.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatGridListModule,
   MatInputModule,
   MatListModule,
   MatProgressSpinnerModule,
@@ -23,6 +23,8 @@ import { AddIngredientComponent } from './components/ingredients/add-ingredient/
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SelectIngredientsComponent } from './components/ingredients/select-ingredient/select-ingredients.component';
 import { AddRecipeComponent } from './components/recipes/add-recipe/add-recipe.component';
+import { OverviewRecipesComponent } from './components/recipes/overview-recipes/overview-recipes.component';
+import {RecipeService} from './services/recipe.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { AddRecipeComponent } from './components/recipes/add-recipe/add-recipe.c
     IngredientsComponent,
     AddIngredientComponent,
     SelectIngredientsComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    OverviewRecipesComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +49,13 @@ import { AddRecipeComponent } from './components/recipes/add-recipe/add-recipe.c
     MatSelectModule,
     MatProgressSpinnerModule,
     MatStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule
   ],
-  providers: [IngredientService],
+  providers: [
+    IngredientService,
+    RecipeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
