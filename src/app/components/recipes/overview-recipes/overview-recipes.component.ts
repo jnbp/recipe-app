@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RecipeService} from '../../../services/recipe.service';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'app-overview-recipes',
@@ -9,7 +10,9 @@ import {RecipeService} from '../../../services/recipe.service';
 export class OverviewRecipesComponent implements OnInit {
   recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService,
+              private cartService: CartService
+  ) { }
 
   ngOnInit() {
     this.recipeService.getRecipes().subscribe(recipes => {
@@ -23,7 +26,10 @@ export class OverviewRecipesComponent implements OnInit {
   }
 
   addToChart(recipe: Recipe) {
-    this.recipeService.addRecipeToChart(recipe);
+
+
+
+    this.cartService.addToCart(this.recipeService.getIngredients(recipe));
   }
 
 }

@@ -25,6 +25,7 @@ import { SelectIngredientsComponent } from './components/ingredients/select-ingr
 import { AddRecipeComponent } from './components/recipes/add-recipe/add-recipe.component';
 import { OverviewRecipesComponent } from './components/recipes/overview-recipes/overview-recipes.component';
 import {RecipeService} from './services/recipe.service';
+import {CartService} from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {RecipeService} from './services/recipe.service';
   ],
   providers: [
     IngredientService,
-    RecipeService
+    RecipeService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

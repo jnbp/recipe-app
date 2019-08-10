@@ -33,15 +33,7 @@ export class RecipeService {
         });
       }));
 
-    // Fetch Document WITH ID same for recipe_ingredients
-    this.recipesingredients = this.recipesingredientsCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as RecipeIngredient;
-          data.id = a.payload.doc.id;
-          return data;
-        });
-      }));
+
   }
 
   getRecipes() {
@@ -52,7 +44,7 @@ export class RecipeService {
   addRecipe(recipe: Recipe, rID, selectedIngredients) {
 
     this.recipesCollection.add(recipe).then(docRef => {
-      for (let ingredient of selectedIngredients) {
+      for (const ingredient of selectedIngredients) {
         this.recipesingredientsCollection.add({recipeID: docRef.id, ingredientID: ingredient});
         console.log({recipeID: docRef.id, ingredientID: ingredient});
       }
@@ -85,9 +77,45 @@ export class RecipeService {
     //this.recipeIngredeintDoc.delete();
   }
 
+  getIngredients(recipe: Recipe) {
+    let ingredients = [];
+    //return output = this.afs.collection('recipes_ingredients', ref => ref.where('recipeID', '==', recipe.id)).get().then(querySnapshot => {
+      //  querySnapshot.forEach(doc => {
+        //  // doc.data() is never undefined for query doc snapshots
+         // console.log(doc.id, " => ", doc.data());
+       // });
+     // })
+      //.catch(error => {
+        //console.log("Error getting documents: ", error);
+//      });;
 
-  addRecipeToChart(recipe: Recipe) {
+
+
+    const query = this.recipesingredientsCollection.ref.where('recipeID', '==', recipe.id);
+    query.get().then(querySnapshot => {
+      if (querySnapshot.empty) {
+        console.log('no data found');
+      } else if (querySnapshot.size > 1) {
+        console.log('no unique data');
+
+        querySnapshot.forEach(documentSnapshot => {
+
+          ingredients.push(documentSnapshot.data());
+          //this.selectedUser$ = this.afs.doc(documentSnapshot.ref);
+        });
+
+      } else {
+        querySnapshot.forEach(documentSnapshot => {
+          console.log(documentSnapshot.ref);
+          //this.selectedUser$ = this.afs.doc(documentSnapshot.ref);
+          // this.afs.doc(documentSnapshot.ref).valueChanges().subscribe(console.log);
+        });
+      }
+    });
+    return ingredients;
 
   }
+
+
 
 }
