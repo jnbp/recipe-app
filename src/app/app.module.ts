@@ -17,7 +17,7 @@ import {
   MatListModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatStepperModule
+  MatStepperModule, MatToolbarModule
 } from '@angular/material';
 import { AddIngredientComponent } from './components/ingredients/add-ingredient/add-ingredient.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -28,6 +28,7 @@ import {RecipeService} from './services/recipe.service';
 import {CartService} from './services/cart.service';
 import { CartComponent } from './components/cart/cart.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { DetailRecipeComponent } from './components/recipes/detail-recipe/detail-recipe.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     SelectIngredientsComponent,
     CartComponent,
     routingComponents,
-    ToolbarComponent
+    ToolbarComponent,
+    DetailRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     MatProgressSpinnerModule,
     MatStepperModule,
     ReactiveFormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatToolbarModule,
   ],
   providers: [
     IngredientService,

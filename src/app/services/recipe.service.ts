@@ -40,6 +40,10 @@ export class RecipeService {
     return this.recipes;
   }
 
+  getRecipe(id) {
+    return this.afs.doc<Recipe>('recipes/' + id).valueChanges();
+  }
+
 
   addRecipe(recipe: Recipe, rID, selectedIngredients) {
 
