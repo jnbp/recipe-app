@@ -4,3 +4,7 @@
   top: 0px;
   left: 0px;
 }
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}

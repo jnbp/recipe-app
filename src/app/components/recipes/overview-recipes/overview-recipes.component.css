@@ -9,4 +9,11 @@
 img {
   object-fit: cover;
   height: auto;
+
+  position: relative;
+  float: left;
+  height: 300px;
+  background-position: 50% 50%;
+  background-repeat:   no-repeat;
+  background-size:     cover;
 }

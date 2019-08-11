@@ -27,9 +27,14 @@ export class CartService {
       }));
   }
 
-  getCart() {
+  async getCart() {
     return this.cartItems;
   }
+
+
+
+
+
 
   addToCart(recipeIngredient: RecipeIngredient) {
 

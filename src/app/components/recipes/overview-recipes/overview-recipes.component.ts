@@ -30,8 +30,8 @@ export class OverviewRecipesComponent implements OnInit {
   }
 
   async addToCart(recipe: Recipe) {
-    for (const recipeingredient of await this.recipeService.getIngredients(recipe)) {
-      this.cartService.addToCart(recipeingredient);
+    for (const element of await this.recipeService.getIngredients(recipe)) {
+      this.cartService.addToCart(element);
     }
   }
 

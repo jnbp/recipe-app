@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe.service';
 import {MatVerticalStepper} from '@angular/material';
 import {IngredientService} from '../../../services/ingredient.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe',
@@ -28,7 +29,8 @@ export class AddRecipeComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
               private ingredientService: IngredientService,
-              private _formBuilder: FormBuilder) { }
+              private _formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -49,13 +51,18 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit(stepper: MatVerticalStepper) {
+
     if (this.recipe.title !== '' && this.recipe.instruction !== '' && this.recipe.picture !== '') {
       this.recipeService.addRecipe(this.recipe, this.recipe.id, this.ingredientService.getSelectedIngredients());
-    }
-    console.log(this.recipe);
-    console.log(this.ingredientService.getSelectedIngredients());
 
-    stepper.reset();
+      console.log(this.recipe);
+      console.log(this.ingredientService.getSelectedIngredients());
+
+      stepper.reset();
+
+      this.router.navigate(['/recipes']);
+
+    }
   }
 
 }

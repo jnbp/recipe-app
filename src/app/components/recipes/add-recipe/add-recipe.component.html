@@ -3,6 +3,9 @@
 </button>-->
 
 
+<div class="container">
+  <div class="row">
+    <div class="col-12">
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -31,9 +34,7 @@
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Zutaten</ng-template>
       <app-select-ingredients></app-select-ingredients>
-      <mat-form-field>
-        <input matInput placeholder="https://www.example.com/picture" formControlName="secondCtrl" required>
-      </mat-form-field>
+
       <div>
         <button mat-button matStepperPrevious>Zurück</button>
         <button mat-button matStepperNext>Weiter</button>
@@ -44,7 +45,7 @@
     <form [formGroup]="forthFormGroup">
       <ng-template matStepLabel>Zubereitungsschritte</ng-template>
       <mat-form-field>
-        <input matInput name ='instruction' [(ngModel)]="recipe.instruction" placeholder="Name"  formControlName="secondCtrl" required>
+        <textarea matInput name ='instruction' [(ngModel)]="recipe.instruction" placeholder="Anleitung"  formControlName="secondCtrl" required></textarea>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Zurück</button>
@@ -73,6 +74,10 @@
   </mat-step>
   -->
 </mat-vertical-stepper>
+
+  </div>
+</div>
+</div>
 
 
 <!-- Copyright 2019 Google Inc. All Rights Reserved.

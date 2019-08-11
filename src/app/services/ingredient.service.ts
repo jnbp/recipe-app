@@ -32,6 +32,24 @@ export class IngredientService {
     return this.ingredients;
   }
 
+  async getIngredients2(): Promise<Ingredient> {
+    const docRef = this.ingredientsCollection.doc();
+    const doc = await docRef.get().toPromise();
+    if (doc.exists) {
+      return  doc.data() as Ingredient;
+    }
+    return null;
+  }
+
+  async getIngredient(id: string): Promise<Ingredient> {
+    const docRef = this.ingredientsCollection.doc(id);
+    const doc = await docRef.get().toPromise();
+    if (doc.exists) {
+      return  doc.data() as Ingredient;
+    }
+    return null;
+  }
+
 
   addIngredient(ingredient: Ingredient) {
     this.ingredientsCollection.add(ingredient);

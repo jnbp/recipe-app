@@ -40,6 +40,8 @@ export class DetailRecipeComponent implements OnInit, OnDestroy {
 
 
 
+
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

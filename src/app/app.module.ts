@@ -11,6 +11,7 @@ import { IngredientsComponent } from './components/ingredients/ingredients.compo
 import {IngredientService} from './services/ingredient.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  MatBottomSheetModule,
   MatButtonModule,
   MatCardModule, MatGridListModule,
   MatInputModule,
@@ -29,8 +30,12 @@ import {CartService} from './services/cart.service';
 import { CartComponent } from './components/cart/cart.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { DetailRecipeComponent } from './components/recipes/detail-recipe/detail-recipe.component';
+import { FabComponent } from './components/fab/fab.component';
 
 @NgModule({
+  entryComponents: [
+    CartComponent
+  ],
   declarations: [
     AppComponent,
     IngredientsComponent,
@@ -39,7 +44,8 @@ import { DetailRecipeComponent } from './components/recipes/detail-recipe/detail
     CartComponent,
     routingComponents,
     ToolbarComponent,
-    DetailRecipeComponent
+    DetailRecipeComponent,
+    FabComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +64,7 @@ import { DetailRecipeComponent } from './components/recipes/detail-recipe/detail
     ReactiveFormsModule,
     MatGridListModule,
     MatToolbarModule,
+    MatBottomSheetModule
   ],
   providers: [
     IngredientService,

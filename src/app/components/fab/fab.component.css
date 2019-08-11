@@ -1,0 +1,16 @@
+.mat-fab {
+  bottom: 45px;
+  right: 24px;
+  position: fixed;
+  font-weight: bolder;
+  font-size: x-large;
+}
+.info {
+  background-color: red;
+  color: white;
+  position: fixed;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+}
+
