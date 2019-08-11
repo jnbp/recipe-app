@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {RecipeService} from '../../../services/recipe.service';
 import {CartService} from '../../../services/cart.service';
+import {IngredientService} from '../../../services/ingredient.service';
+import {element} from 'protractor';
+import {__await} from 'tslib';
 
 @Component({
   selector: 'app-overview-recipes',
@@ -11,6 +14,7 @@ export class OverviewRecipesComponent implements OnInit {
   recipes: Recipe[];
 
   constructor(private recipeService: RecipeService,
+              private ingredientService: IngredientService,
               private cartService: CartService
   ) { }
 
@@ -25,11 +29,10 @@ export class OverviewRecipesComponent implements OnInit {
     this.recipeService.deleteRecipe(recipe);
   }
 
-  addToChart(recipe: Recipe) {
-
-
-
-    this.cartService.addToCart(this.recipeService.getIngredients(recipe));
+  async addToCart(recipe: Recipe) {
+    for (const ingredientID of await this.recipeService.getIngredients(recipe)) {
+    this.cartService.addToCart(ingredientID);
+    }
   }
 
 }

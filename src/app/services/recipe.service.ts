@@ -77,42 +77,35 @@ export class RecipeService {
     //this.recipeIngredeintDoc.delete();
   }
 
-  getIngredients(recipe: Recipe) {
-    let ingredients = [];
-    //return output = this.afs.collection('recipes_ingredients', ref => ref.where('recipeID', '==', recipe.id)).get().then(querySnapshot => {
-      //  querySnapshot.forEach(doc => {
-        //  // doc.data() is never undefined for query doc snapshots
-         // console.log(doc.id, " => ", doc.data());
-       // });
-     // })
-      //.catch(error => {
-        //console.log("Error getting documents: ", error);
-//      });;
+  async getIngredients(recipe: Recipe): Promise<string[]> {
 
+    const tempArray = [];
 
 
     const query = this.recipesingredientsCollection.ref.where('recipeID', '==', recipe.id);
-    query.get().then(querySnapshot => {
-      if (querySnapshot.empty) {
+    const querySnapshot = await query.get();
+
+
+    if (querySnapshot.empty) {
         console.log('no data found');
-      } else if (querySnapshot.size > 1) {
+        return tempArray;
+      } else {
         console.log('no unique data');
 
+
         querySnapshot.forEach(documentSnapshot => {
 
-          ingredients.push(documentSnapshot.data());
-          //this.selectedUser$ = this.afs.doc(documentSnapshot.ref);
+          tempArray.push(documentSnapshot.ref.id);
+
+
         });
 
-      } else {
-        querySnapshot.forEach(documentSnapshot => {
-          console.log(documentSnapshot.ref);
-          //this.selectedUser$ = this.afs.doc(documentSnapshot.ref);
-          // this.afs.doc(documentSnapshot.ref).valueChanges().subscribe(console.log);
-        });
+
       }
-    });
-    return ingredients;
+
+
+    console.log('niklas: ', tempArray.length);
+    return tempArray;
 
   }
 

@@ -27,13 +27,14 @@ export class CartService {
       }));
   }
 
-  addToCart(ingredients) {
-    console.log(ingredients);
-    console.log(ingredients.length);
+  addToCart(ingredientID: string) {
 
-    for (const aasda of ingredients) {
-      console.log(aasda.id);
-    }
+
+      console.log('add: ', ingredientID);
+
+
+      this.cartCollection.add({ingredientID});
+
 
 
     // this.angular.forEach(ingredients, ingredientID => {

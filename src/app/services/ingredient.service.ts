@@ -32,6 +32,11 @@ export class IngredientService {
     return this.ingredients;
   }
 
+  getIngredient(id: string) {
+    this.itemDoc = this.afs.doc(`ingredients/${id}`);
+    return this.itemDoc;
+  }
+
   addIngredient(ingredient: Ingredient) {
     this.ingredientsCollection.add(ingredient);
   }
