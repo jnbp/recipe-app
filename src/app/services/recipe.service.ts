@@ -66,9 +66,9 @@ export class RecipeService {
     //this.recipeIngredeintDoc = this.afs.collection('recipes_ingredients', ref => ref.where('recipeID', '==', recipe.id));
 
     //console.log(this.afs.collection('recipes_ingredients', ref => {
-     // let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-     // if (this.recipeID) { query = this.qurey.where('recipeID', '==', recipe.id)};
-     // return query;
+    // let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+    // if (this.recipeID) { query = this.qurey.where('recipeID', '==', recipe.id)};
+    // return query;
     //}).valueChanges());
 
     console.log(this.recipesingredientsCollection.ref.where('recipeID', '==', recipe.id));
@@ -77,35 +77,25 @@ export class RecipeService {
     //this.recipeIngredeintDoc.delete();
   }
 
-  async getIngredients(recipe: Recipe): Promise<string[]> {
+  async getIngredients(recipe: Recipe): Promise<RecipeIngredient[]> {
 
-    const tempArray = [];
-
+    const ingredientArray = [];
 
     const query = this.recipesingredientsCollection.ref.where('recipeID', '==', recipe.id);
     const querySnapshot = await query.get();
 
-
     if (querySnapshot.empty) {
-        console.log('no data found');
-        return tempArray;
-      } else {
-        console.log('no unique data');
+      console.log('no data found');
+      return ingredientArray;
+    } else {
+      console.log('no unique data');
+      querySnapshot.forEach(documentSnapshot => {
+        ingredientArray.push(documentSnapshot.data());
+        // ref.id    oder .data
+      });
+    }
 
-
-        querySnapshot.forEach(documentSnapshot => {
-
-          tempArray.push(documentSnapshot.ref.id);
-
-
-        });
-
-
-      }
-
-
-    console.log('niklas: ', tempArray.length);
-    return tempArray;
+    return ingredientArray;
 
   }
 

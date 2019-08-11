@@ -20,22 +20,18 @@ export class IngredientService {
     // Fetch Document WITH ID
     this.ingredients = this.ingredientsCollection.snapshotChanges().pipe(
       map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Ingredient;
-        data.id = a.payload.doc.id;
-        return data;
-      });
-    }));
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Ingredient;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      }));
   }
 
   getIngredients() {
     return this.ingredients;
   }
 
-  getIngredient(id: string) {
-    this.itemDoc = this.afs.doc(`ingredients/${id}`);
-    return this.itemDoc;
-  }
 
   addIngredient(ingredient: Ingredient) {
     this.ingredientsCollection.add(ingredient);
@@ -47,11 +43,13 @@ export class IngredientService {
   }
 
   setSelectedIngredients(ingredients) {
-  this.selectedIngredients = ingredients;
-}
+    this.selectedIngredients = ingredients;
+  }
 
   getSelectedIngredients() {
-     return this.selectedIngredients;
+    return this.selectedIngredients;
   }
+
+
 
 }

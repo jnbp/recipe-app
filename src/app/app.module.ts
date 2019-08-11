@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IngredientsComponent } from './components/ingredients/ingredients.component';
 import {IngredientService} from './services/ingredient.service';
@@ -26,6 +26,8 @@ import { AddRecipeComponent } from './components/recipes/add-recipe/add-recipe.c
 import { OverviewRecipesComponent } from './components/recipes/overview-recipes/overview-recipes.component';
 import {RecipeService} from './services/recipe.service';
 import {CartService} from './services/cart.service';
+import { CartComponent } from './components/cart/cart.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,9 @@ import {CartService} from './services/cart.service';
     IngredientsComponent,
     AddIngredientComponent,
     SelectIngredientsComponent,
-    AddRecipeComponent,
-    OverviewRecipesComponent
+    CartComponent,
+    routingComponents,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

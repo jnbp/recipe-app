@@ -27,22 +27,26 @@ export class CartService {
       }));
   }
 
-  addToCart(ingredientID: string) {
+  getCart() {
+    return this.cartItems;
+  }
+
+  addToCart(recipeIngredient: RecipeIngredient) {
 
 
-      console.log('add: ', ingredientID);
+    console.log('add: ', recipeIngredient);
 
 
-      this.cartCollection.add({ingredientID});
+    this.cartCollection.add({ingredientID: recipeIngredient.ingredientID, quantity: 999});
 
 
 
     // this.angular.forEach(ingredients, ingredientID => {
-      // console.log(ingredientID);
+    // console.log(ingredientID);
     // })
 
 
-     // this.cartCollection.add({ingredientID: ingredient});
+    // this.cartCollection.add({ingredientID: ingredient});
 
   }
 
