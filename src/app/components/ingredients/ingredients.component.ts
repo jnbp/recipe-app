@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {IngredientService} from '../../services/ingredient.service';
 import {MatDialog} from '@angular/material';
 import {AddIngredientComponent} from './add-ingredient/add-ingredient.component';
+import {SelectIngredientsComponent} from './select-ingredient/select-ingredients.component';
 
 @Component({
   selector: 'app-ingredients',
@@ -33,5 +34,11 @@ export class IngredientsComponent implements OnInit {
     this.matDialog.open(AddIngredientComponent);
 
   }
+
+  openIngredientToCartDialog(): void {
+    this.matDialog.open(SelectIngredientsComponent);
+
+  }
+
 
 }

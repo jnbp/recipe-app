@@ -35,7 +35,8 @@ import { FabComponent } from './components/fab/fab.component';
 @NgModule({
   entryComponents: [
     CartComponent,
-    AddIngredientComponent
+    AddIngredientComponent,
+    SelectIngredientsComponent
   ],
   declarations: [
     AppComponent,

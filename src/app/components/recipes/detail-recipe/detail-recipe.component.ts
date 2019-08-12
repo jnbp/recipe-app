@@ -76,7 +76,7 @@ export class DetailRecipeComponent implements OnInit, OnDestroy {
 
   async addToCart(recipe: Recipe) {
     for (const element of await this.recipeService.getIngredients2(this.id)) {
-      this.cartService.addToCart(element);
+      this.cartService.addToCart(element.ingredientID, element.quantity);
     }
   }
 

@@ -41,13 +41,13 @@ export class CartService {
 
 
 
-  addToCart(recipeIngredient: RecipeIngredient) {
+  addToCart(ingredientID: string, quantity: number) {
 
 
-    console.log('add: ', recipeIngredient);
+    console.log('add: ', ingredientID);
 
 
-    this.cartCollection.add({ingredientID: recipeIngredient.ingredientID, quantity: 999});
+    this.cartCollection.add({ingredientID, quantity});
 
 
 
