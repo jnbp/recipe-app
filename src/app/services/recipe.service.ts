@@ -139,6 +139,7 @@ export class RecipeService {
 
   async getIngredients2(recipeID: string): Promise<RecipeIngredient[]> {
 
+    console.log('MA: ', recipeID);
     const ingredientArray = [];
     const query = this.recipesingredientsCollection.ref.where('recipeID', '==', recipeID);
     const querySnapshot = await query.get();

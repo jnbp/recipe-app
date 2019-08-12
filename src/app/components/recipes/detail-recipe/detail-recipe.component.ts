@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import {RecipeService} from '../../../services/recipe.service';
 import {ActivatedRoute} from '@angular/router';
 import {IngredientService} from '../../../services/ingredient.service';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'app-detail-recipe',
@@ -19,6 +20,7 @@ export class DetailRecipeComponent implements OnInit, OnDestroy {
 
   constructor(private recipeService: RecipeService,
               private ingredientService: IngredientService,
+              private cartService: CartService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -72,7 +74,11 @@ export class DetailRecipeComponent implements OnInit, OnDestroy {
   }
 
 
-
+  async addToCart(recipe: Recipe) {
+    for (const element of await this.recipeService.getIngredients2(this.id)) {
+      this.cartService.addToCart(element);
+    }
+  }
 
 
 
