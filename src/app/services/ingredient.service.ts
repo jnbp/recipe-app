@@ -1,31 +1,40 @@
-import { Injectable } from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import DocumentReference = firebase.firestore.DocumentReference;
+import {
+  Injectable
+} from '@angular/core';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from 'angularfire2/firestore';
+import {
+  Observable
+} from 'rxjs';
+import {
+  map
+} from 'rxjs/operators';
+// import DocumentReference = firebase.firestore.DocumentReference;
 
 @Injectable({
   providedIn: 'root'
 })
 export class IngredientService {
-  ingredientsCollection: AngularFirestoreCollection<Ingredient>;
-  ingredients: Observable<Ingredient[]>;
-  itemDoc: AngularFirestoreDocument<Ingredient>;
+  ingredientsCollection: AngularFirestoreCollection < Ingredient > ;
+  ingredients: Observable < Ingredient[] > ;
+  itemDoc: AngularFirestoreDocument < Ingredient > ;
   selectedIngredients = [];
   selectedIngredientsQuantities: number[] = [];
-  categorys = ['Obst', 'Gemüse', 'Fleisch', 'Milchprodukte' , 'Basics', 'Sonstiges'];
+  categorys = ['Obst', 'Gemüse', 'Fleisch', 'Milchprodukte', 'Basics', 'Sonstiges'];
   units = ['g', 'ml', 'Stück', 'TL', 'EL'];
 
   constructor(public afs: AngularFirestore) {
-    //this.ingredients = this.afs.collection('ingredients').valueChanges();
-
+    // grab ingredients asc
     this.ingredientsCollection = this.afs.collection('ingredients', ref => ref.orderBy('category', 'asc'));
 
     this.fetchDocumentID();
   }
 
+  // fetch Document with ID
   fetchDocumentID() {
-    // Fetch Document WITH ID
     this.ingredients = this.ingredientsCollection.snapshotChanges().pipe(
       map(changes => {
         return changes.map(a => {
@@ -36,49 +45,28 @@ export class IngredientService {
       }));
   }
 
+  // return observable
   getIngredients() {
     this.fetchDocumentID();
-
-    console.log(this.ingredients);
-    console.log(this.ingredientsCollection.valueChanges());
     return this.ingredients;
   }
 
-  getIngredients3() {
+  // return collection
+  getIngredientsCol() {
     return this.ingredientsCollection.valueChanges();
   }
 
 
-  async getIngredients2(): Promise<Ingredient> {
-    const docRef = this.ingredientsCollection.doc();
-    const doc = await docRef.get().toPromise();
-    if (doc.exists) {
-      return  doc.data() as Ingredient;
-    }
-    return null;
-  }
 
-  async getIngredient(ingredientID: string): Promise<Ingredient> {
+  // return ingredient from ingredientID
+  // science request runs parallel, async handling necessary
+  async getIngredient(ingredientID: string): Promise < Ingredient > {
     const docRef = this.ingredientsCollection.doc(ingredientID);
-    const doc = await docRef.get().toPromise();
-    if (doc.exists) {
-      return  doc.data() as Ingredient;
-    }
-    return null;
-  }
-
-  async getIngredient2(ingredientID: string): Promise<Ingredient> {
-
-    const docRef = this.ingredientsCollection.doc<Ingredient>(ingredientID);
-
     const doc = await docRef.get().toPromise();
     if (doc.exists) {
       return doc.data() as Ingredient;
     }
     return null;
-
-
-
   }
 
 
@@ -86,20 +74,18 @@ export class IngredientService {
     this.ingredientsCollection.add(ingredient);
   }
 
-  deleteIngredient(ingredient: Ingredient) {
-    this.itemDoc = this.afs.doc(`ingredients/${ingredient.id}`);
-    this.itemDoc.delete();
-  }
-
+  // science selectIngredients-component stores data in ingredientService, setter and getter are necessary
   setSelectedIngredients(ingredients, quantities: number[]) {
     this.selectedIngredients = ingredients;
     this.selectedIngredientsQuantities = quantities;
   }
 
+  // science selectIngredients-component stores data in ingredientService, setter and getter are necessary
   getSelectedIngredients() {
     return this.selectedIngredients;
   }
 
+  // science selectIngredients-component stores data in ingredientService, setter and getter are necessary
   getSelectedIngredientsQuantities() {
     return this.selectedIngredientsQuantities;
   }
@@ -111,7 +97,5 @@ export class IngredientService {
   getUnits(): string[] {
     return this.units;
   }
-
-
 
 }

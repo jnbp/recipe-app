@@ -5,47 +5,33 @@
     <div class="container">
       <div class="row">
 
-    <mat-form-field (ngSubmit)="onSubmit()" class="col-12 form-group">
-      <input name ='title' matInput [(ngModel)]="ingredient.title" placeholder="Name" required>
-    </mat-form-field>
-        <!--
-                <div class="col-12">
-            <mat-form-field (ngSubmit)="onSubmit(form)" class="form-group">
-              <input name ='unit' matInput [(ngModel)]="ingredient.unit" placeholder="Einheit" required>
-            </mat-form-field>
-                </div>
-
-                  <div class="col-12">
-            <mat-form-field (ngSubmit)="onSubmit(form)" class="form-group">
-              <input name ='category' matInput [(ngModel)]="ingredient.category" placeholder="Kategorie" required>
-            </mat-form-field>
-                  </div>
-        -->
-
-            <mat-form-field class="col-12">
-              <mat-label>Einheit</mat-label>
-            <mat-select name='unit' [(ngModel)]="ingredient.unit">
-              <mat-option *ngFor="let element of units" value="{{element}}">
-                {{element}}
-              </mat-option>
-            </mat-select>
-            </mat-form-field>
-
-            <mat-form-field class="col-12">
-              <mat-label>Kategorie</mat-label>
-              <mat-select name='category' [(ngModel)]="ingredient.category">
-                <mat-option *ngFor="let element of categorys" value="{{element}}">
-                  {{element}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+        <mat-form-field (ngSubmit)="onSubmit()" class="col-12 form-group">
+          <input name='title' matInput [(ngModel)]="ingredient.title" placeholder="Name" required>
+        </mat-form-field>
 
 
+        <mat-form-field class="col-12">
+          <mat-label>Einheit</mat-label>
+          <mat-select name='unit' [(ngModel)]="ingredient.unit">
+            <mat-option *ngFor="let element of units" value="{{element}}">
+              {{element}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <mat-label>Kategorie</mat-label>
+          <mat-select name='category' [(ngModel)]="ingredient.category">
+            <mat-option *ngFor="let element of categorys" value="{{element}}">
+              {{element}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
 
-    <div class="col-12">
-      <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">Add</button>
-    </div>
+        <div class="col-12">
+          <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">Add</button>
+        </div>
       </div>
     </div>
   </form>

@@ -1,9 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RecipeService} from '../../../services/recipe.service';
-import {MatSnackBar, MatVerticalStepper} from '@angular/material';
-import {IngredientService} from '../../../services/ingredient.service';
-import {Router} from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  RecipeService
+} from '../../../services/recipe.service';
+import {
+  MatSnackBar,
+  MatVerticalStepper
+} from '@angular/material';
+import {
+  IngredientService
+} from '../../../services/ingredient.service';
+import {
+  Router
+} from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe',
@@ -31,8 +47,9 @@ export class AddRecipeComponent implements OnInit {
               private ingredientService: IngredientService,
               private _formBuilder: FormBuilder,
               private router: Router,
-              private snackbar: MatSnackBar) { }
+              private snackbar: MatSnackBar) {}
 
+  // formGroups, necessary for MatStepper
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -52,19 +69,16 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit(stepper: MatVerticalStepper) {
-
-    //this.recipeService.addRecipe({title: 'U4', picture: '123', instruction: '123'}, ['9Kmzcc2ehEsnaZkm2keK'], [3]);
-
     if (this.recipe.title !== '' && this.recipe.instruction !== '' && this.recipe.picture !== '') {
-      this.recipeService.addRecipe(this.recipe, this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
 
-      this.snackbar.open('Rezept "' + this.recipe.title + '" hinzugefügt', '', {duration: 3000});
+      // call addRecipe and transmit ingredientArray and quantitiesArray
+      this.recipeService.addRecipe(this.recipe, this.ingredientService.getSelectedIngredients(),
+        this.ingredientService.getSelectedIngredientsQuantities());
 
-      console.log('addRecipe()', this.recipe, this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
-      console.log('TEST', this.ingredientService.getSelectedIngredientsQuantities());
-
+      this.snackbar.open('Rezept "' + this.recipe.title + '" hinzugefügt', '', {
+        duration: 3000
+      });
       stepper.reset();
-
       this.router.navigate(['/recipes']);
 
     }

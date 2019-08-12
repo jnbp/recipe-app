@@ -1,11 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import {IngredientService} from '../../../services/ingredient.service';
-import {AddIngredientComponent} from '../add-ingredient/add-ingredient.component';
-import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-import {CartService} from '../../../services/cart.service';
-import {IngredientsComponent} from '../ingredients.component';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  IngredientService
+} from '../../../services/ingredient.service';
+import {
+  AddIngredientComponent
+} from '../add-ingredient/add-ingredient.component';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatSnackBar
+} from '@angular/material';
+import {
+  NgForm
+} from '@angular/forms';
+import {
+  Router
+} from '@angular/router';
+import {
+  CartService
+} from '../../../services/cart.service';
+import {
+  IngredientsComponent
+} from '../ingredients.component';
 
 @Component({
   selector: 'app-select-ingredients',
@@ -18,16 +37,28 @@ export class SelectIngredientsComponent implements OnInit {
   quantity: number;
   selectedIngredient: Ingredient;
 
-  selectedIngredients: {ingredients: string[], quantities: number[]} = {ingredients: [], quantities: []};
+  selectedIngredients: {
+    ingredients: string[],
+    quantities: number[]
+  } = {
+    ingredients: [],
+    quantities: []
+  };
 
-  tempList: {ingredientID: string, quantity: number, title: string}[] = [];
+  tempList: {
+    ingredientID: string,
+    quantity: number,
+    title: string
+  } [] = [];
 
   constructor(private ingredientService: IngredientService,
               private cartService: CartService,
               private matDialog: MatDialog,
               private router: Router,
-              private snackbar: MatSnackBar) { }
+              private snackbar: MatSnackBar) {}
 
+  // init local selectedOptions array
+  // fetch ingredients
   ngOnInit() {
     this.selectedOptions = [];
 
@@ -37,53 +68,43 @@ export class SelectIngredientsComponent implements OnInit {
     });
   }
 
-  onNgModelChange(event) {
-    //this.ingredientService.setSelectedIngredients(this.selectedOptions);
-    //console.log(this.selectedOptions);
-
-    //console.log("CHAN");
-  }
-
+  // new ingredient dialog opener
   openIngredientDialog(): void {
     this.matDialog.open(AddIngredientComponent);
   }
 
+  // check if component is loaded in "add recipe" component or "ingredients"(cartAdd without recipe)
+  // -> same component used for ingredientsSelection
   async onSubmit(form: NgForm) {
-    
     if (this.router.url.includes('add')) {
-
       if (this.quantity > 0) {
-        //this.ingredientService.addIngredient(this.ingredient);
 
+        // for selected ingredients view
+        this.tempList.push({
+          ingredientID: this.selectedIngredient[0].id,
+          quantity: this.quantity,
+          title: this.selectedIngredient[0].title
+        });
 
-        // For selected ingredients view
-        this.tempList.push({ingredientID: this.selectedIngredient[0].id, quantity: this.quantity, title: this.selectedIngredient[0].title});
-        //console.log(this.tempList);
-
-
+        // adding currently selected item to item-arrays
         this.selectedIngredients.ingredients.push(this.selectedIngredient[0].id);
         this.selectedIngredients.quantities.push(this.quantity);
 
-        //this.selectedIngredients[0].push(this.selectedIngredient[0], this.quantity);
-        //console.log('selectedIngredient', this.selectedIngredient[0]);
-
-
+        // since ingredient selection is stored in ingredientService, transmit item-arrays to ingredientService
         this.ingredientService.setSelectedIngredients(this.selectedIngredients.ingredients, this.selectedIngredients.quantities);
 
-
-        console.log('OUT', this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
         form.resetForm();
       }
 
     } else {
-      this.snackbar.open(this.selectedIngredient[0].title + ' der Einkaufsliste hinzugefügt', '', {duration: 3000});
-
+      // add selected ingredients to cart
       this.cartService.addToCart(this.selectedIngredient[0].id, this.quantity);
+      this.snackbar.open(this.selectedIngredient[0].title + ' der Einkaufsliste hinzugefügt', '', {
+        duration: 3000
+      });
       this.matDialog.closeAll();
     }
 
-
-    // this.matDialogRef.close();
   }
 
 }

@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {MatBottomSheet} from '@angular/material';
-import {CartComponent} from '../cart/cart.component';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  MatBottomSheet
+} from '@angular/material';
+import {
+  CartComponent
+} from '../cart/cart.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,10 +16,9 @@ import {CartComponent} from '../cart/cart.component';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private bottomSheet: MatBottomSheet) { }
+  constructor(private bottomSheet: MatBottomSheet) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 
   openBottomSheet(): void {
