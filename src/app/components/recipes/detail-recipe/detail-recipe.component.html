@@ -9,14 +9,17 @@
       {{recipe.instruction}}
     </p>
   </div>
-    <div class="col-12">
+  </div>
+  <div class="row">
+    <div class="col-6">
       <mat-chip-list aria-label="Fish selection" *ngFor="let ingredient of ingredients; let i = index">
-        <mat-chip color="primary" selected>{{this.recipeIngredients[i].quantity}} {{ingredient.unit}} {{ingredient.title}}</mat-chip>
+        <mat-chip color="primary" selected>{{this.recipeIngredients[i].quantity}} {{ingredient.unit}}&nbsp;<b>{{ingredient.title}}</b></mat-chip>
       </mat-chip-list>
     </div>
-    <div class="col-12">
-      <button mat-button (click)="addToCart(recipe)">Zutaten in die Liste</button>
+    <div class="col-6">
+      <button mat-stroked-button color="accent" (click)="addToCart(recipe)">+ Einkaufsliste</button>
     </div>
+  </div>
 </div>
 
 

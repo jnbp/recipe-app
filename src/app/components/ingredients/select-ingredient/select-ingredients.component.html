@@ -1,13 +1,18 @@
+<h3><b>Zutatenauswahl</b></h3>
+
 <div *ngIf="ingredients?.length > 0;else noIngredients">
 
+  <div class="container">
+    <div class="row">
 
 
-  <mat-card>
+
+  <mat-card class="col-12">
     <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
       <div class="container">
         <div class="row">
 
-          <mat-form-field>
+          <mat-form-field class="col-12 form-group" (ngSubmit)="onSubmit(form)">
             <mat-label>Zutat</mat-label>
             <mat-select [(ngModel)]="selectedIngredient" (ngModelChange)="onNgModelChange($event)" name="ingredient" required>
 
@@ -18,7 +23,7 @@
           </mat-form-field>
 
 
-          <mat-form-field (ngSubmit)="onSubmit(form)" class="form-group">
+          <mat-form-field class="col-12 form-group" (ngSubmit)="onSubmit(form)">
             <input name ='quantity' matInput [(ngModel)]="quantity" (ngModelChange)="onNgModelChange($event)" placeholder="Menge" required>
           </mat-form-field>
 
@@ -57,19 +62,27 @@
     </mat-list-option>
   </mat-selection-list>-->
 
-  <button (click)="openIngredientDialog()" mat-stroked-button color="accent">Neue Zutat</button>
 
 
+  <mat-card class="col-12">
   <div *ngIf="tempList?.length > 0;else noIngredientsSelected">
     <mat-list *ngFor="let element of tempList" class="collection" role="list">
       <mat-list-item role="listitem">{{element.quantity}} x {{element.title}}</mat-list-item>
     </mat-list>
   </div>
+</mat-card>
+
+      <div class="col-s12">
+        <button (click)="openIngredientDialog()" mat-stroked-button color="primary">Neue Zutat</button>
+      </div>
+    </div>
+  </div>
 
 </div>
 
+
 <ng-template #noIngredients>
-  <mat-spinner></mat-spinner>
+  <button (click)="openIngredientDialog()" mat-stroked-button color="primary">Neue Zutat</button>
 </ng-template>
 
 <ng-template #noIngredientsSelected>

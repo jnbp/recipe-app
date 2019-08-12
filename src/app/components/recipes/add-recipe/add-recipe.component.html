@@ -3,9 +3,15 @@
 </button>-->
 
 
+
+
 <div class="container">
   <div class="row">
-    <div class="col-12">
+
+
+    <div class="col-12"><h1><b>Neues Rezept</b></h1></div>
+
+    <mat-card class="col-12">
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -14,7 +20,7 @@
         <input matInput name ='title' [(ngModel)]="recipe.title" placeholder="Name" formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Weiter</button>
+        <button mat-raised-button matStepperNext color="primary">&#9654;</button>
       </div>
     </form>
   </mat-step>
@@ -22,11 +28,11 @@
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Bild zum Rezept</ng-template>
       <mat-form-field>
-        <input matInput name ='picture' [(ngModel)]="recipe.picture" placeholder="Name"  formControlName="secondCtrl" required>
+        <input matInput name ='picture' [(ngModel)]="recipe.picture" placeholder="https://www.example.com/picture.jpg"  formControlName="secondCtrl" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Zurück</button>
-        <button mat-button matStepperNext>Weiter</button>
+        <button mat-stroked-button matStepperPrevious color="primary">&#9664;</button>
+        <button mat-raised-button matStepperNext color="primary">&#9654;</button>
       </div>
     </form>
   </mat-step>
@@ -36,8 +42,8 @@
       <app-select-ingredients></app-select-ingredients>
 
       <div>
-        <button mat-button matStepperPrevious>Zurück</button>
-        <button mat-button matStepperNext>Weiter</button>
+        <button mat-stroked-button matStepperPrevious color="primary">&#9664;</button>
+        <button mat-raised-button matStepperNext color="primary">&#9654;</button>
       </div>
     </form>
   </mat-step>
@@ -48,8 +54,8 @@
         <textarea matInput name ='instruction' [(ngModel)]="recipe.instruction" placeholder="Anleitung"  formControlName="secondCtrl" required></textarea>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Zurück</button>
-        <button mat-button matStepperNext>Weiter</button>
+        <button mat-stroked-button matStepperPrevious color="primary">&#9664;</button>
+        <button mat-raised-button matStepperNext color="primary">&#9654;</button>
       </div>
     </form>
   </mat-step>
@@ -58,8 +64,8 @@
     <form [formGroup]="sixthFormGroup" (ngSubmit)="onSubmit(stepper)">
       <ng-template matStepLabel>Abschließen</ng-template>
       <div>
-        <button mat-button matStepperPrevious>Zurück</button>
-        <button mat-button type="submit">Speichern</button>
+        <button mat-stroked-button matStepperPrevious color="primary">&#9664;</button>
+        <button mat-raised-button type="submit" color="primary">Hinzufügen</button>
       </div>
     </form>
   </mat-step>
@@ -75,7 +81,7 @@
   -->
 </mat-vertical-stepper>
 
-  </div>
+  </mat-card>
 </div>
 </div>
 

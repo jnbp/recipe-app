@@ -23,11 +23,12 @@ export class CartComponent implements OnInit {
 
   async ngOnInit() {
 
+
+
     this.categorys = this.ingredientService.getCategorys();
 
 
     await this.cartService.getCart().subscribe(async cartItems => {
-      console.log(cartItems);
       this.cartItems = cartItems;
 
 
@@ -37,7 +38,6 @@ export class CartComponent implements OnInit {
 
       }
 
-      console.log(this.ingredients);
 
 
 

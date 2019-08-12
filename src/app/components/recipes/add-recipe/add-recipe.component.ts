@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe.service';
-import {MatVerticalStepper} from '@angular/material';
+import {MatSnackBar, MatVerticalStepper} from '@angular/material';
 import {IngredientService} from '../../../services/ingredient.service';
 import {Router} from '@angular/router';
 
@@ -30,7 +30,8 @@ export class AddRecipeComponent implements OnInit {
   constructor(private recipeService: RecipeService,
               private ingredientService: IngredientService,
               private _formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -56,6 +57,8 @@ export class AddRecipeComponent implements OnInit {
 
     if (this.recipe.title !== '' && this.recipe.instruction !== '' && this.recipe.picture !== '') {
       this.recipeService.addRecipe(this.recipe, this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
+
+      this.snackbar.open('Rezept "' + this.recipe.title + '" hinzugefügt', '', {duration: 3000});
 
       console.log('addRecipe()', this.recipe, this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
       console.log('TEST', this.ingredientService.getSelectedIngredientsQuantities());

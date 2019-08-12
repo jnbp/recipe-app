@@ -15,10 +15,10 @@ import {
   MatButtonModule,
   MatCardModule, MatChipsModule, MatDialogModule, MatGridListModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatSelectModule,
-  MatStepperModule, MatToolbarModule
+  MatSelectModule, MatSnackBarModule, MatSortModule,
+  MatStepperModule, MatTableModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { AddIngredientComponent } from './components/ingredients/add-ingredient/add-ingredient.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -68,7 +68,12 @@ import { FabComponent } from './components/fab/fab.component';
     MatToolbarModule,
     MatBottomSheetModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [
     IngredientService,

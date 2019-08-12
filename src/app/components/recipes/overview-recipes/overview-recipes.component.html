@@ -16,24 +16,27 @@
 
 <div class="container">
   <div class="row">
+
+    <div class="col-12">
+      <h1><b>Rezepte</b>-Übersicht</h1>
+    </div>
+
 <div *ngFor="let recipe of recipes">
   <div class="col-4">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{recipe.title}}</mat-card-title>
+        <mat-card-title class="text">{{recipe.title}}</mat-card-title>
         <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
       </mat-card-header>
 
       <img mat-card-image src="{{recipe.picture}}">
 
-      <mat-card-content>
-        <p class="text-crop">
+      <mat-card-content class="text-crop">
           {{recipe.instruction}}
-        </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button [routerLink]="['/recipe', recipe.id]">Details</button>
-        <button mat-button (click)="addToCart(recipe)">Zutaten in die Liste</button>
+        <button mat-raised-button color="primary" [routerLink]="['/recipe', recipe.id]">Details</button>
+        <button mat-stroked-button color="accent" (click)="addToCart(recipe)"><b>+</b> Einkaufsliste</button>
       </mat-card-actions>
     </mat-card>
   </div>

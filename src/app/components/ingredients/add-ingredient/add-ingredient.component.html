@@ -1,15 +1,13 @@
-<h1>Zutat hinzufügen</h1>
+<h3>Neue <b>Zutat</b></h3>
 
 <mat-card>
   <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
     <div class="container">
       <div class="row">
 
-        <div class="col-12">
-    <mat-form-field (ngSubmit)="onSubmit()" class="form-group">
+    <mat-form-field (ngSubmit)="onSubmit()" class="col-12 form-group">
       <input name ='title' matInput [(ngModel)]="ingredient.title" placeholder="Name" required>
     </mat-form-field>
-        </div>
         <!--
                 <div class="col-12">
             <mat-form-field (ngSubmit)="onSubmit(form)" class="form-group">
@@ -24,7 +22,7 @@
                   </div>
         -->
 
-            <mat-form-field>
+            <mat-form-field class="col-12">
               <mat-label>Einheit</mat-label>
             <mat-select name='unit' [(ngModel)]="ingredient.unit">
               <mat-option *ngFor="let element of units" value="{{element}}">
@@ -33,9 +31,9 @@
             </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-12">
               <mat-label>Kategorie</mat-label>
-              <mat-select>
+              <mat-select name='category' [(ngModel)]="ingredient.category">
                 <mat-option *ngFor="let element of categorys" value="{{element}}">
                   {{element}}
                 </mat-option>
@@ -46,7 +44,7 @@
 
 
     <div class="col-12">
-      <button mat-stroked-button type="submit" [disabled]="form.invalid">Add</button>
+      <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">Add</button>
     </div>
       </div>
     </div>

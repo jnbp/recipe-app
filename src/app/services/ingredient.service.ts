@@ -13,7 +13,8 @@ export class IngredientService {
   itemDoc: AngularFirestoreDocument<Ingredient>;
   selectedIngredients = [];
   selectedIngredientsQuantities: number[] = [];
-  categorys = ['Obst', 'Gemüse', 'Milchprodukte' , 'Basics', 'Sonstiges'];
+  categorys = ['Obst', 'Gemüse', 'Fleisch', 'Milchprodukte' , 'Basics', 'Sonstiges'];
+  units = ['g', 'ml', 'Stück', 'TL', 'EL'];
 
   constructor(public afs: AngularFirestore) {
     //this.ingredients = this.afs.collection('ingredients').valueChanges();
@@ -41,6 +42,10 @@ export class IngredientService {
     console.log(this.ingredients);
     console.log(this.ingredientsCollection.valueChanges());
     return this.ingredients;
+  }
+
+  getIngredients3() {
+    return this.ingredientsCollection.valueChanges();
   }
 
 
@@ -101,6 +106,10 @@ export class IngredientService {
 
   getCategorys(): string[] {
     return this.categorys;
+  }
+
+  getUnits(): string[] {
+    return this.units;
   }
 
 

@@ -4,6 +4,7 @@ import {CartService} from '../../../services/cart.service';
 import {IngredientService} from '../../../services/ingredient.service';
 import {element} from 'protractor';
 import {__await} from 'tslib';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-overview-recipes',
@@ -15,7 +16,8 @@ export class OverviewRecipesComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
               private ingredientService: IngredientService,
-              private cartService: CartService
+              private cartService: CartService,
+              private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,9 @@ export class OverviewRecipesComponent implements OnInit {
     for (const element of await this.recipeService.getIngredients2(recipe.id)) {
       this.cartService.addToCart(element.ingredientID, element.quantity);
     }
+    this.snackbar.open((await this.recipeService.getIngredients2(recipe.id)).length + ' Zutaten für das Rezept "' + recipe.title +
+      '" in Einkaufsliste hinzugefügt', '', {duration: 3000});
+
   }
 
 }

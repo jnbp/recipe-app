@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IngredientService} from '../../../services/ingredient.service';
 import {NgForm} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef, MatSnackBar} from '@angular/material';
 import {IngredientsComponent} from '../ingredients.component';
 
 
@@ -16,25 +16,30 @@ export class AddIngredientComponent implements OnInit {
     unit: '',
     category: ''
   }
-  units = ['g', 'ml', 'Stück', 'TL', 'EL'];
-  categorys =  [];
+  units: string[] = [];
+  categorys: string[] = [];
 
   constructor(private ingredientService: IngredientService,
-              private matDialogRef: MatDialogRef<AddIngredientComponent, IngredientsComponent>) { }
+              private matDialogRef: MatDialogRef<AddIngredientComponent, IngredientsComponent>,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit() {
-    this.categorys = this.ingredientService.getCategorys;
+    this.units = this.ingredientService.getUnits();
+    this.categorys = this.ingredientService.getCategorys();
   }
 
   onSubmit(form: NgForm) {
-    if (this.ingredient.title != '') {
+    if (this.ingredient.title !== '' && this.ingredient.unit !== '' && this.ingredient.category !== '') {
       this.ingredientService.addIngredient(this.ingredient);
-
+      this.snackbar.open(this.ingredient.title + ' hinzugefügt', '', {duration: 3000});
     }
-    console.log(this.ingredient);
+
+
 
     form.resetForm();
     this.matDialogRef.close();
+
+
   }
 
 }

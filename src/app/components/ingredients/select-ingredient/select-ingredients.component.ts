@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IngredientService} from '../../../services/ingredient.service';
 import {AddIngredientComponent} from '../add-ingredient/add-ingredient.component';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CartService} from '../../../services/cart.service';
@@ -25,7 +25,8 @@ export class SelectIngredientsComponent implements OnInit {
   constructor(private ingredientService: IngredientService,
               private cartService: CartService,
               private matDialog: MatDialog,
-              private router: Router) { }
+              private router: Router,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.selectedOptions = [];
@@ -75,6 +76,8 @@ export class SelectIngredientsComponent implements OnInit {
       }
 
     } else {
+      this.snackbar.open(this.selectedIngredient[0].title + ' der Einkaufsliste hinzugefügt', '', {duration: 3000});
+
       this.cartService.addToCart(this.selectedIngredient[0].id, this.quantity);
       this.matDialog.closeAll();
     }

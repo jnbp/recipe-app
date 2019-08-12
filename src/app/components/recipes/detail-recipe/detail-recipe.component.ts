@@ -3,6 +3,7 @@ import {RecipeService} from '../../../services/recipe.service';
 import {ActivatedRoute} from '@angular/router';
 import {IngredientService} from '../../../services/ingredient.service';
 import {CartService} from '../../../services/cart.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-detail-recipe',
@@ -21,7 +22,8 @@ export class DetailRecipeComponent implements OnInit, OnDestroy {
   constructor(private recipeService: RecipeService,
               private ingredientService: IngredientService,
               private cartService: CartService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -78,6 +80,12 @@ export class DetailRecipeComponent implements OnInit, OnDestroy {
     for (const element of await this.recipeService.getIngredients2(this.id)) {
       this.cartService.addToCart(element.ingredientID, element.quantity);
     }
+
+
+    this.snackbar.open((await this.recipeService.getIngredients2(this.id)).length + ' Zutaten für das Rezept "' + recipe.title +
+      '" in Einkaufsliste hinzugefügt', '', {duration: 3000});
+
+
   }
 
 

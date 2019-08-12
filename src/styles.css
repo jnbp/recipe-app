@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.mat-but {
+  font-weight: 900;
+  font-family: Roboto;
+}
 
 
 /**
@@ -26,7 +30,7 @@ body {
 /* ROOT FONT STYLES */
 
 * {
-  font-family: 'Lato', Helvetica, sans-serif;
+  font-family: 'Roboto', 'Lato', Helvetica, sans-serif;
   /*color: #333447;
   line-height: 1.5;*/
 }

@@ -1,17 +1,53 @@
-  <mat-list>
-    <ng-container *ngFor="let category of categorys">
-      <h3 mat-subheader>{{category}}</h3>
-      <ng-container *ngFor="let item of ingredients">
-        <ng-container *ngIf="item.ingredient.category === category">
+<div class="container">
+  <div class="row">
 
-          <mat-list-item>
-            <h4 mat-line><b>{{item.ingredient.title}}</b>
-              <br><i>{{item.quantity}} {{item.ingredient.unit}}</i></h4>
-          </mat-list-item>
+    <div class="col-12">
+      <h1><b>Einkaufsliste</b></h1>
+    </div>
+
+    <mat-list *ngIf="ingredients?.length > 0;else noCartItems">
+      <ng-container *ngFor="let category of categorys">
+        <h3 mat-subheader>{{category}}</h3>
+        <ng-container *ngFor="let item of ingredients">
+          <ng-container *ngIf="item.ingredient.category === category">
+            <mat-card class="col-12">
+              <mat-list-item>
+                <h4 mat-line><b>{{item.ingredient.title}}</b>
+                  <br>{{item.quantity}} <i>{{item.ingredient.unit}}</i></h4>
+              </mat-list-item>
+            </mat-card>
+          </ng-container>
         </ng-container>
+      </ng-container>
+    </mat-list>
+
+  </div>
+</div>
+
+<ng-template #noCartItems>
+  <h5>Einkaufsliste hat keine Einträge</h5>
+</ng-template>
+
+<!--
+<div class="container">
+  <div class="row">
+
+    <mat-list>
+        <ng-container *ngFor="let item of ingredients">
+            <div class="col-3">
+              <mat-list-item>
+                <h4 mat-line><b>{{item.ingredient.title}}</b>
+                  <br><i>{{item.quantity}} {{item.ingredient.category}}</i></h4>
+              </mat-list-item>
+            </div>
         </ng-container>
-    </ng-container>
-  </mat-list>
+    </mat-list>
+
+  </div>
+</div>
+
+-->
+
 <!--
   <mat-list>
     <ng-container *ngFor="let category of categorys">
