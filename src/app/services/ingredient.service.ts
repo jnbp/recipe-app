@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import DocumentReference = firebase.firestore.DocumentReference;
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class IngredientService {
   itemDoc: AngularFirestoreDocument<Ingredient>;
   selectedIngredients = [];
   selectedIngredientsQuantities: number[] = [];
+  categorys = ['Obst', 'Gemüse', 'Milchprodukte' , 'Basics', 'Sonstiges'];
 
   constructor(public afs: AngularFirestore) {
     //this.ingredients = this.afs.collection('ingredients').valueChanges();
@@ -51,13 +53,27 @@ export class IngredientService {
     return null;
   }
 
-  async getIngredient(id: string): Promise<Ingredient> {
-    const docRef = this.ingredientsCollection.doc(id);
+  async getIngredient(ingredientID: string): Promise<Ingredient> {
+    const docRef = this.ingredientsCollection.doc(ingredientID);
     const doc = await docRef.get().toPromise();
     if (doc.exists) {
       return  doc.data() as Ingredient;
     }
     return null;
+  }
+
+  async getIngredient2(ingredientID: string): Promise<Ingredient> {
+
+    const docRef = this.ingredientsCollection.doc<Ingredient>(ingredientID);
+
+    const doc = await docRef.get().toPromise();
+    if (doc.exists) {
+      return doc.data() as Ingredient;
+    }
+    return null;
+
+
+
   }
 
 
@@ -81,6 +97,10 @@ export class IngredientService {
 
   getSelectedIngredientsQuantities() {
     return this.selectedIngredientsQuantities;
+  }
+
+  getCategorys(): string[] {
+    return this.categorys;
   }
 
 

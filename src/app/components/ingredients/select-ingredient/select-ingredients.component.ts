@@ -25,8 +25,7 @@ export class SelectIngredientsComponent implements OnInit {
   constructor(private ingredientService: IngredientService,
               private cartService: CartService,
               private matDialog: MatDialog,
-              private router: Router,
-              private matDialogRef: MatDialogRef<IngredientsComponent>) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.selectedOptions = [];
@@ -77,7 +76,7 @@ export class SelectIngredientsComponent implements OnInit {
 
     } else {
       this.cartService.addToCart(this.selectedIngredient[0].id, this.quantity);
-      this.matDialogRef.close();
+      this.matDialog.closeAll();
     }
 
 

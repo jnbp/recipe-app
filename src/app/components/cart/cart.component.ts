@@ -12,20 +12,47 @@ import {element} from 'protractor';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[];
-  ingredients: Ingredient[] = [];
+  ingredients: {ingredient: Ingredient, quantity: number}[] = [];
   ingredients2: Ingredient;
+  categorys: string[] = [];
 
   constructor(public ingredientService: IngredientService,
               public cartService: CartService,
-              private bottomSheetRef: MatBottomSheetRef<ToolbarComponent>) { }
+              //private bottomSheetRef: MatBottomSheetRef<ToolbarComponent>
+               ) { }
 
   async ngOnInit() {
 
+    this.categorys = this.ingredientService.getCategorys();
+
+
+    await this.cartService.getCart().subscribe(async cartItems => {
+      console.log(cartItems);
+      this.cartItems = cartItems;
+
+
+      for (let i = 0; i < this.cartItems.length; i++) {
+        const tempIngredient = await this.ingredientService.getIngredient2(this.cartItems[i].ingredientID);
+        this.ingredients.push({ingredient: tempIngredient, quantity: cartItems[i].quantity});
+
+      }
+
+      console.log(this.ingredients);
 
 
 
 
 
+
+
+
+
+
+    });
+    
+
+
+/*
 
 
     await this.cartService.getCart().subscribe(async cartItems => {
@@ -39,7 +66,7 @@ export class CartComponent implements OnInit {
     console.log(this.ingredients);
     
     
-
+*/
     
     
 

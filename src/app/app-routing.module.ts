@@ -4,12 +4,14 @@ import {OverviewRecipesComponent} from './components/recipes/overview-recipes/ov
 import {AddRecipeComponent} from './components/recipes/add-recipe/add-recipe.component';
 import {DetailRecipeComponent} from './components/recipes/detail-recipe/detail-recipe.component';
 import {IngredientsComponent} from './components/ingredients/ingredients.component';
+import {CartComponent} from './components/cart/cart.component';
 
 const routes: Routes = [
   { path: 'recipes', component: OverviewRecipesComponent},
   { path: 'add', component: AddRecipeComponent},
   { path: 'recipe/:id', component: DetailRecipeComponent},
-  { path: 'ingredients', component: IngredientsComponent}
+  { path: 'ingredients', component: IngredientsComponent},
+  { path: 'cart', component: CartComponent}
 
 ];
 

@@ -16,6 +16,10 @@ export class CartService {
 
     this.cartCollection = this.afs.collection('cart', );
 
+    this.fetchDocumentID();
+  }
+
+  fetchDocumentID() {
     // Fetch Document WITH ID
     this.cartItems = this.cartCollection.snapshotChanges().pipe(
       map(changes => {
@@ -28,7 +32,9 @@ export class CartService {
   }
 
   getCart() {
-    return this.cartCollection.valueChanges();
+
+    this.fetchDocumentID();
+    return this.cartItems;
   }
 
 

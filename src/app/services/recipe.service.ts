@@ -84,7 +84,7 @@ export class RecipeService {
     this.recipesCollection.add(recipe).then(docRef => {
       for (let i = 0; i < selectedIngredients.length; i++) {
         console.log('i: ', i);
-        this.recipesingredientsCollection.add({recipeID: docRef.id, ingredientID: selectedIngredients[i], quantity: +5});
+        this.recipesingredientsCollection.add({recipeID: docRef.id, ingredientID: selectedIngredients[i], quantity: +selectedIngredientsQuantities[i]});
         console.log({recipeID: docRef.id, ingredientID: selectedIngredients[i], quantity: +5});
       }
     });

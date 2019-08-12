@@ -17,12 +17,13 @@ export class AddIngredientComponent implements OnInit {
     category: ''
   }
   units = ['g', 'ml', 'Stück', 'TL', 'EL'];
-  categorys = ['Obst', 'Gemüse', 'Milchprodukte' , 'Basics', 'Sonstiges'];
+  categorys =  [];
 
   constructor(private ingredientService: IngredientService,
               private matDialogRef: MatDialogRef<AddIngredientComponent, IngredientsComponent>) { }
 
   ngOnInit() {
+    this.categorys = this.ingredientService.getCategorys;
   }
 
   onSubmit(form: NgForm) {
