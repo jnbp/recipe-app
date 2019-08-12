@@ -7,7 +7,7 @@ import {IngredientsComponent} from './components/ingredients/ingredients.compone
 import {CartComponent} from './components/cart/cart.component';
 
 const routes: Routes = [
-  { path: 'recipes', component: OverviewRecipesComponent},
+  { path: '', component: OverviewRecipesComponent},
   { path: 'add', component: AddRecipeComponent},
   { path: 'recipe/:id', component: DetailRecipeComponent},
   { path: 'ingredients', component: IngredientsComponent},
@@ -20,4 +20,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [OverviewRecipesComponent, AddRecipeComponent]
+export const routingComponents = [OverviewRecipesComponent, AddRecipeComponent];

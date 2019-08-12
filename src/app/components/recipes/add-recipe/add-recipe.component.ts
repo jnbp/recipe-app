@@ -79,7 +79,7 @@ export class AddRecipeComponent implements OnInit {
         duration: 3000
       });
       stepper.reset();
-      this.router.navigate(['/recipes']);
+      this.router.navigate(['/']);
 
     }
   }
