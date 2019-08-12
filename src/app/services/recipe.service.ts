@@ -79,12 +79,13 @@ export class RecipeService {
 
 
 
-  addRecipe(recipe: Recipe, rID, selectedIngredients) {
+  addRecipe(recipe: Recipe, selectedIngredients: string[], selectedIngredientsQuantities: number[]) {
 
     this.recipesCollection.add(recipe).then(docRef => {
-      for (const ingredient of selectedIngredients) {
-        this.recipesingredientsCollection.add({recipeID: docRef.id, ingredientID: ingredient});
-        console.log({recipeID: docRef.id, ingredientID: ingredient});
+      for (let i = 0; i < selectedIngredients.length; i++) {
+        console.log('i: ', i);
+        this.recipesingredientsCollection.add({recipeID: docRef.id, ingredientID: selectedIngredients[i], quantity: +5});
+        console.log({recipeID: docRef.id, ingredientID: selectedIngredients[i], quantity: +5});
       }
     });
 

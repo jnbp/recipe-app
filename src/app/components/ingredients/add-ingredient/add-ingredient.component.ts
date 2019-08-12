@@ -27,7 +27,7 @@ export class AddIngredientComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.ingredient.title != '') {
-      //this.ingredientService.addIngredient(this.ingredient);
+      this.ingredientService.addIngredient(this.ingredient);
 
     }
     console.log(this.ingredient);

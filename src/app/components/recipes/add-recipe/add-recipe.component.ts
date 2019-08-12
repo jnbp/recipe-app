@@ -52,11 +52,13 @@ export class AddRecipeComponent implements OnInit {
 
   onSubmit(stepper: MatVerticalStepper) {
 
-    if (this.recipe.title !== '' && this.recipe.instruction !== '' && this.recipe.picture !== '') {
-      this.recipeService.addRecipe(this.recipe, this.recipe.id, this.ingredientService.getSelectedIngredients());
+    //this.recipeService.addRecipe({title: 'U4', picture: '123', instruction: '123'}, ['9Kmzcc2ehEsnaZkm2keK'], [3]);
 
-      console.log(this.recipe);
-      console.log(this.ingredientService.getSelectedIngredients());
+    if (this.recipe.title !== '' && this.recipe.instruction !== '' && this.recipe.picture !== '') {
+      this.recipeService.addRecipe(this.recipe, this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
+
+      console.log('addRecipe()', this.recipe, this.ingredientService.getSelectedIngredients(), this.ingredientService.getSelectedIngredientsQuantities());
+      console.log('TEST', this.ingredientService.getSelectedIngredientsQuantities());
 
       stepper.reset();
 

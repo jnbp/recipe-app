@@ -11,12 +11,17 @@ export class IngredientService {
   ingredients: Observable<Ingredient[]>;
   itemDoc: AngularFirestoreDocument<Ingredient>;
   selectedIngredients = [];
+  selectedIngredientsQuantities: number[] = [];
 
   constructor(public afs: AngularFirestore) {
     //this.ingredients = this.afs.collection('ingredients').valueChanges();
 
     this.ingredientsCollection = this.afs.collection('ingredients', ref => ref.orderBy('category', 'asc'));
 
+    this.fetchDocumentID();
+  }
+
+  fetchDocumentID() {
     // Fetch Document WITH ID
     this.ingredients = this.ingredientsCollection.snapshotChanges().pipe(
       map(changes => {
@@ -29,7 +34,11 @@ export class IngredientService {
   }
 
   getIngredients() {
-    return this.ingredientsCollection.valueChanges();
+    this.fetchDocumentID();
+
+    console.log(this.ingredients);
+    console.log(this.ingredientsCollection.valueChanges());
+    return this.ingredients;
   }
 
 
@@ -61,12 +70,17 @@ export class IngredientService {
     this.itemDoc.delete();
   }
 
-  setSelectedIngredients(ingredients) {
+  setSelectedIngredients(ingredients, quantities: number[]) {
     this.selectedIngredients = ingredients;
+    this.selectedIngredientsQuantities = quantities;
   }
 
   getSelectedIngredients() {
     return this.selectedIngredients;
+  }
+
+  getSelectedIngredientsQuantities() {
+    return this.selectedIngredientsQuantities;
   }
 
 
