@@ -1,12 +1,26 @@
-<mat-list>
+<ng-container *ngIf="ingredients.length > 0">
+  <ng-container *ngFor="let ingredient of ingredients">
+    <h4>{{ingredient.title}}</h4>
+  </ng-container>
+  </ng-container>
+
+
+  <!--
+
+  <mat-list>
   <h3 mat-subheader>Folders</h3>
+  <ng-container *ngIf="ingredients.length > 0">
   <mat-list-item *ngFor="let ingredient of ingredients">
     <h4 mat-line>{{ingredient.title}}</h4>
   </mat-list-item>
+  </ng-container>
 
   <mat-divider></mat-divider>
   <h3 mat-subheader>Notes</h3>
   <mat-list-item *ngFor="let cartItem of cartItems">
-    <h4 mat-line>{{cartItem.quantity}}</h4>
+    <h4 mat-line>{{}}</h4>
   </mat-list-item>
 </mat-list>
+
+
+  -->

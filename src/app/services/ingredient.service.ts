@@ -29,8 +29,9 @@ export class IngredientService {
   }
 
   getIngredients() {
-    return this.ingredients;
+    return this.ingredientsCollection.valueChanges();
   }
+
 
   async getIngredients2(): Promise<Ingredient> {
     const docRef = this.ingredientsCollection.doc();

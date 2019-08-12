@@ -2,10 +2,10 @@
 
  <mat-toolbar ma class="mat-toolbar mat-elevation-z8" color="primary">
 
-  <span routerLink="/recipe">RecipeManager</span>
+  <span [routerLink]="['/recipes']">RecipeManager</span>
   <span class="toolbar-spacer"></span>
   <button [routerLink]="['/recipes']" mat-stroked-button>Rezepte Übersicht</button>
-  <button routerLink="/ingredients" mat-stroked-button>Zutatenverwaltung</button>
+  <button [routerLink]="['/ingredients']" mat-stroked-button>Zutatenverwaltung</button>
   <button (click)="openBottomSheet()" mat-stroked-button>Einkaufswagen</button>
 
 </mat-toolbar>

@@ -27,9 +27,14 @@ export class CartService {
       }));
   }
 
-  async getCart() {
-    return this.cartItems;
+  getCart() {
+    return this.cartCollection.valueChanges();
   }
+
+
+
+
+
 
 
 

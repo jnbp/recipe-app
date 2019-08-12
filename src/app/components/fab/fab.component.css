@@ -4,6 +4,7 @@
   position: fixed;
   font-weight: bolder;
   font-size: x-large;
+  z-index: 999;
 }
 .info {
   background-color: red;
@@ -12,5 +13,6 @@
   bottom: 0px;
   text-align: center;
   width: 100%;
+  z-index: 999;
 }
 

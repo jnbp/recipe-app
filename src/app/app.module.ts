@@ -13,7 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatBottomSheetModule,
   MatButtonModule,
-  MatCardModule, MatGridListModule,
+  MatCardModule, MatChipsModule, MatDialogModule, MatGridListModule,
   MatInputModule,
   MatListModule,
   MatProgressSpinnerModule,
@@ -34,7 +34,8 @@ import { FabComponent } from './components/fab/fab.component';
 
 @NgModule({
   entryComponents: [
-    CartComponent
+    CartComponent,
+    AddIngredientComponent
   ],
   declarations: [
     AppComponent,
@@ -64,7 +65,9 @@ import { FabComponent } from './components/fab/fab.component';
     ReactiveFormsModule,
     MatGridListModule,
     MatToolbarModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatDialogModule,
+    MatChipsModule
   ],
   providers: [
     IngredientService,

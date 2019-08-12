@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import {RecipeService} from '../../../services/recipe.service';
 import {ActivatedRoute} from '@angular/router';
+import {IngredientService} from '../../../services/ingredient.service';
 
 @Component({
   selector: 'app-detail-recipe',
@@ -9,34 +10,67 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DetailRecipeComponent implements OnInit, OnDestroy {
   recipe: Recipe;
-  id: number;
+  id: string;
   private sub: any;
+  ingredients: Ingredient[] = [];
+  recipeIngredients: RecipeIngredient[] = [];
+
+  localIngredient: [] = [];
 
   constructor(private recipeService: RecipeService,
+              private ingredientService: IngredientService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
 
 
 
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id']; // (+) converts string 'id' to a number
-
-
-
-      // In a real app: dispatch action to load the details here.
+    this.recipeService.getRecipe('wFpdJLOdgm9sTwa57NGR').then( recipe => {
+      this.recipe = recipe;
     });
 
 
 
 
-    this.recipeService.getRecipe(this.id).subscribe(recipe => {
+    this.sub = this.route.params.subscribe(async params => {
+      this.id = params.id; // (+) converts string 'id' to a number
+
+
+      this.recipe = await this.recipeService.getRecipe(this.id);
+      console.log(this.recipe.title);
+      // In a real app: dispatch action to load the details here.
+
+
+      for (const element of await this.recipeService.getIngredients2(this.id)) {
+        this.ingredients.push(await this.ingredientService.getIngredient(element.ingredientID));
+        this.recipeIngredients.push(element);
+        console.log(element);
+
+
+      }
+
+
+
+
+    });
+
+
+
+
+    /*await this.recipeService.getRecipe(this.id).subscribe(recipe => {
+      console.log('HU', recipe);
       this.recipe = recipe;
       console.log(this.recipe);
-    });
+    });*/
+
+
+
+
+
 
 
   }
+
 
 
 

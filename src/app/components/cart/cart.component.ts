@@ -3,6 +3,7 @@ import {CartService} from '../../services/cart.service';
 import {IngredientService} from '../../services/ingredient.service';
 import {MatBottomSheetRef} from '@angular/material';
 import {ToolbarComponent} from '../toolbar/toolbar.component';
+import {element} from 'protractor';
 
 @Component({
   selector: 'app-cart',
@@ -19,6 +20,44 @@ export class CartComponent implements OnInit {
               private bottomSheetRef: MatBottomSheetRef<ToolbarComponent>) { }
 
   async ngOnInit() {
+
+
+
+
+
+
+
+
+    await this.cartService.getCart().subscribe(async cartItems => {
+      this.cartItems = cartItems;
+      console.log(this.cartItems);
+      for (const element of this.cartItems) {
+        this.ingredients.push(await this.ingredientService.getIngredient(element.ingredientID));
+      }
+      console.log(this.ingredients);
+    });
+    console.log(this.ingredients);
+    
+    
+
+    
+    
+
+/*
+    this.ingredientService.getRecipes().subscribe(recipes => {
+      this.recipes = recipes;
+      console.log(this.recipes);
+    });
+
+
+
+
+
+    for (const element of await this.cartService.getCart()) {
+      this.ingredients.push(await this.ingredientService.getIngredient(element.ingredientID));
+    }
+
+
 
     await  this.cartService.getCart()
 
@@ -39,7 +78,7 @@ export class CartComponent implements OnInit {
 
     console.log(this.ingredients.length);
 
-
+*/
  }
 
 }

@@ -23,6 +23,12 @@ export class RecipeService {
     this.recipesCollection = this.afs.collection('recipes', ref => ref.orderBy('title','asc'));
     this.recipesingredientsCollection = this.afs.collection('recipes_ingredients', ref => ref.orderBy('recipeID','asc'));
 
+
+    this.fetchDocumentID();
+
+  }
+
+  fetchDocumentID() {
     // Fetch Document WITH ID
     this.recipes = this.recipesCollection.snapshotChanges().pipe(
       map(changes => {
@@ -32,17 +38,45 @@ export class RecipeService {
           return data;
         });
       }));
-
-
   }
 
   getRecipes() {
+    this.fetchDocumentID();
+
+    console.log(this.recipes);
+    console.log(this.recipesCollection.valueChanges());
     return this.recipes;
   }
 
-  getRecipe(id) {
+
+  getRecipeOLDOLD(id) {
     return this.afs.doc<Recipe>('recipes/' + id).valueChanges();
   }
+
+  async getRecipeOLD(id: string): Promise<Recipe> {
+    const docRef = this.recipesCollection.doc(id);
+    const doc = await docRef.get().toPromise();
+    if (doc.exists) {
+      return  doc.data() as Recipe;
+    }
+    return null;
+  }
+
+  async getRecipe(recipeID: string): Promise<Recipe> {
+
+    const docRef = this.recipesCollection.doc<Recipe>(recipeID);
+
+    const doc = await docRef.get().toPromise();
+    if (doc.exists) {
+      return doc.data() as Recipe;
+    }
+    return null;
+
+
+
+  }
+
+
 
 
   addRecipe(recipe: Recipe, rID, selectedIngredients) {
@@ -84,8 +118,28 @@ export class RecipeService {
   async getIngredients(recipe: Recipe): Promise<RecipeIngredient[]> {
 
     const ingredientArray = [];
-
     const query = this.recipesingredientsCollection.ref.where('recipeID', '==', recipe.id);
+    const querySnapshot = await query.get();
+
+    if (querySnapshot.empty) {
+      console.log('no data found');
+      return ingredientArray;
+    } else {
+      console.log('no unique data');
+      querySnapshot.forEach(documentSnapshot => {
+        ingredientArray.push(documentSnapshot.data());
+        // ref.id    oder .data
+      });
+    }
+
+    return ingredientArray;
+
+  }
+
+  async getIngredients2(recipeID: string): Promise<RecipeIngredient[]> {
+
+    const ingredientArray = [];
+    const query = this.recipesingredientsCollection.ref.where('recipeID', '==', recipeID);
     const querySnapshot = await query.get();
 
     if (querySnapshot.empty) {
